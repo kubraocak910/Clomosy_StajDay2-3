@@ -1,0 +1,393 @@
+
+//7
+/*var
+form : TclForm;
+tradio: TCLRadioButton;
+{
+  form= TclForm.Create(self);
+  tradio= form.AddNewRadioButton(form, 'tradio', 'dosya');
+  tradio.isChecked=True;
+  form.run;
+}*/
+
+
+//9 
+/*var
+MyForm : TclForm;
+thscroll :TCLHorzScrollBox ;
+tvscroll:TCLVertScrollBox;
+txbutton,tybutton: TCLButton;
+i : Integer;
+{
+  MyForm= TclForm.Create(self);
+  thscroll=MyForm.AddNewHorzScrollBox(MyForm,'thscroll');
+  thscroll.align=alMostTop;
+  thscroll.height=Tform(Myform).clientheight/4;
+  
+  tvscroll=Myform.AddNewVertScrollBox(MyForm,'tvscroll');
+  tvscroll.align=alMostTop// hizzalayarak ekliyor
+  
+  tvscroll.height=Tform(Myform).clientheight/2;
+
+  
+  for (i=1 to 15)
+  {
+    txbutton=MyForm.AddNewButton(thscroll,'xbuton'+IntToStr(i), IntToStr(i)+'.xbuton');
+    txbutton.align=alLeft;
+    txbutton.height=100;
+    txbutton.styledsettings=ssFamily;
+   
+  }
+  
+  for (i=1 to 15)
+  {
+    tybutton=MyForm.AddNewButton(tvscroll,'ybuton'+IntToStr(i), IntToStr(i)+'.ybuton');
+    tybutton.align=alTop;
+    tybutton.height=100;
+    tybutton.styledsettings=ssFamily;
+  }
+  
+    MyForm.run;
+}*/
+
+
+//12 günleri açılır pencere ile gösterme TCLComboBox
+/*var 
+MyForm:TclForm;
+tcombo:TCLComboBox;
+i:Integer;
+void hava
+{
+  if (tcombo.ItemIndex == 5)
+  {
+    ShowMessage('güneşli');
+  }
+  else
+  {
+    ShowMessage('bulutlu');
+  }
+}
+{
+  MyForm=TclForm.Create(self);
+  tcombo=MyForm.AddNewComboBox(MyForm, 'tcombo');
+  tcombo.align=altop;
+  tcombo.width=100;
+  tcombo.margins.top=20;
+  
+  tcombo.additem('pazartesi','1');
+  tcombo.addItem('salı','2');
+  tcombo.addItem('çarşamba','3');
+  tcombo.addItem('perşembe','4');
+  tcombo.addItem('cuma','5');
+  tcombo.addItem('cumartesi','6'); 
+  tcombo.addItem('pazar','7');
+  
+  MyForm.AddNewEvent(tcombo,tbeOnChange,'hava');
+     
+     MyForm.run
+}*/
+
+ 
+
+//13  TCLListView listedeki ögeleri hem arayıp hem kaydırma
+/*var 
+MyForm:TclForm;
+tlistview: TCLListView;
+{
+  MyForm=TclForm.Create(self);
+  tlistview=MyForm.AddNewListView(MyForm,'tlistview');
+  tlistview.align=alClient;
+tlistview.clLoadListViewDataFromDataset(Clomosy.clDataSetFromJSON('[
+   {"MAIN_TEXT": "mert Özkal", "FOOTER_TEXT": "koc"},
+   {"MAIN_TEXT": "kübra ocak ", "FOOTER_TEXT": "aslan"},
+   {"MAIN_TEXT": "karya korkmazyigit", "FOOTER_TEXT": "akrep"} ]'));
+ 
+  MyForm.Run;
+}*/
+
+
+// 14 TCLTimer kronometre yapıyoruz 
+/*var 
+MyForm:TclForm;
+startb,stopb:TCLButton;
+time: TCLTimer;
+tlabel: TCLLabel;
+zaman,saniye,salise:Integer;
+void start
+{
+  time.Enabled = True;
+}
+void stop
+{
+  time.Enabled = False;
+}
+void show
+{ Inc(zaman); /// sou varr ben bu kodun 0.1 saniyede döndüğünü nerden anladımm kod her 0.1 saniyede buraya ulaşıyor o yüzden 100 e değil 10 bölüyoruz
+  salise = zaman mod 10;
+  saniye =zaman div 10 ;
+  tlabel.caption= IntToStr(saniye)+':'+IntToStr(salise);
+}
+{
+zaman =0;
+  MyForm=TclForm.Create(self);
+  
+  time=MyForm.AddNewTimer(MyForm,'time', 100);
+  MyForm.AddNewEvent(time,tbeOnTimer,'show');
+  
+  tlabel= MyForm.AddNewLabel(MyForm,'tlabel','');
+  tlabel.align=alCenter;
+  
+  
+  
+  startb=MyForm.AddNewButton(MyForm,'startb', 'start');
+  startb.margins.right=200;
+  MyForm.AddNewEvent(startb,tbeOnClick,'start');
+  
+  stopb=MyForm.AddNewButton(MyForm,'stopb', 'stop');
+  stopb.margins.left=200;
+  MyForm.AddNewEvent(stopb,tbeOnClick,'stop');
+  
+  MyForm.Run;}*/
+  
+
+//15 TCLChart grafik yapıyoruz
+/*var 
+MyForm:TclForm;
+tchart:TCLChart;
+{
+  MyForm=TclForm.Create(self);
+  tchart=MyForm.AddNewChart(MyForm,'tchart', '');
+  tchart.charttitle='boy ';
+  tchart.charttype=clCPie;
+  tchart.xaxisText ='name';
+  tchart.chartitemtext='boylar:';
+  tchart.chartitemsvalue='boy';
+  tchart.width=300;
+  tchart.height=300;
+  tchart.align=alCenter;
+  tchart.clLoadDataFromJSONStr('[
+  {"name":"aslı","boy":"150","color":"clOrange"},
+  {"name":"merve","boy":"190","color":"clpink"}
+  
+  ]')
+  MyForm.Run;
+}*/
+
+
+// 16 Qr yapma
+/*var 
+MyForm:TclForm;
+tqr:TCLQRCodeGenerator;
+buton : TCLButton;
+void qrsorun
+{
+  tqr.text='yio yokk bir daha dene';
+  buton.caption=tqr.text;
+}
+{
+  MyForm=TclForm.Create(self);
+  tqr=MyForm.AddNewQRCodeGenerator(MyForm,'tqr', 'seni seviyorum');
+  tqr.width=200;
+  tqr.height=200;
+  tqr.align=alTop ;
+  
+  buton= MyForm.AddNewButton(MyForm, 'xName', 'qrda sorun mu var?');
+  buton.width=200;
+  buton.height=100;
+  buton.align=alCenter;
+  MyForm.AddNewEvent(buton,tbeOnClick,'qrsorun');
+  MyForm.run;
+}*/
+
+
+// 17 TclProEdit / labelin bayaaa gelişmişi 
+/*var
+MyForm :TclForm;
+pedit:TclProEdit;
+pimg:TClProImage;
+
+void setup 
+{
+pedit=MyForm.AddNewProEdit(MyForm, 'pedit', 'phone number');
+pedit.maxlength= 11;
+pedit.align=alCenter;
+pedit.width=100;
+pedit.height=20;
+pedit.clProSettings.FontColor=clAlphaColor.clHexToColor('#ad0000');
+pedit.clProSettings.FontVertAlign=palcenter;
+pedit.SetclProSettings(pedit.clProSettings);
+
+pimg=MyForm.AddNewProImage(pedit, 'pimg');
+pimg.align=alLeft;
+pimg.clProSettings.RoundWidth=20;
+pimg.clProSettings.RoundHeight =20;
+pimg.clProSettings.PictureSource ='https://cdn.pixabay.com/photo/2015/04/ 23/22/00/tree-736885_960_720.jpg';
+pimg.SetclProSettings(pimg.clProSettings);
+}
+{
+MyForm=TclForm.Create(self);
+setup;
+MyForm.Run;
+}*/
+  
+// 26 TCldrawform
+/* var
+   DrawForm1 : TclDrawForm;
+ 
+ {
+   DrawForm1 = TclDrawForm.Create(Self);
+   DrawForm1.clSetStyle(DrawForm1.DarkSB); //DrawForm1.DarkSB - DrawForm1.LightSB
+   DrawForm1.DrawApp(True);  
+ 
+   DrawForm1.Run;
+ }*/
+
+
+
+
+//ÇOK UĞRAŞTIMMMM  VE U DAH AUĞRAŞACAĞIM ÇÜNKÜ SONRAKİ VİDEO BUNUNLA İLGİLİ
+var 
+MyForm :TclForm;
+mplist :TClProListView ;
+mdlist:TClProListViewDesignerPanel;
+mtitle : TClProButton;
+calisan : TCLUnit;
+
+void goCalisan
+{
+  MyForm.clShow;
+  calisan.UnitName = 'calisan';
+  calisan.callerForm=MyForm;
+  calisan.run;
+}
+
+
+{
+  MyForm=TclForm.Create(self);
+  MyForm.clSetCaption('Ana Kod');
+  calisan=TCLUnit.Create;
+  
+  
+  // ana sayfa Background
+    mplist=MyForm.AddNewProListView(MyForm, 'mplist');
+    mplist.align = alClient;
+    mplist.margins.bottom=5;
+    mplist.margins.top=5;
+    mplist.margins.left=5;
+    mplist.margins.right=5;
+    mplist.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#3cb187');
+    mplist.clProSettings.IsRound = True; 
+    mplist.clProSettings.ViewType = lvWaterFall;
+    mplist.clProSettings.ItemWidth = 200;
+    mplist.clProSettings.ItemHeight = 200;
+    mplist.clProSettings.ColCount = 2;
+    mplist.clProSettings.ItemSpace = 10;
+    mplist.SetclProSettings(mplist.clProSettings);
+  
+  
+  // ana sayfa  panel tasarımı
+    mdlist=MyForm.AddNewProListViewDesignerPanel(mplist, 'mdlist');
+    mdlist.clProSettings.IsRound = True; 
+    mdlist.clProSettings.RoundHeight = 50;
+    mdlist.clProSettings.RoundWidth = 50;
+    mdlist.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#eeeeee');
+    mdlist.SetclProSettings(mdlist.clProSettings);
+    mplist.SetDesignerPanel(mdlist);
+    
+  // ana sayfa paneldeki yazı tasarımı
+    mtitle =MyForm.AddNewProButton(mdlist, 'mtitle', '');
+    mtitle.Align = altop;
+    mtitle.Align = alTop;
+    mtitle.Margins.Top = 50;
+    mtitle.Margins.Left = 10;
+    mtitle.Margins.Right = 10;
+    mtitle.clProSettings.WordWrap = True;
+    mtitle.clProSettings.AutoSize = True;
+    mtitle.clProSettings.TextSettings.Font.Style = [fsBold];
+    mtitle.clProSettings.FontSize =20;
+    mtitle.clProSettings.FontColor=clAlphaColor.clHexToColor('#3cb187');
+    mtitle.SetclProSettings(mtitle.clProSettings);
+    mdlist.AddPanelObject(mtitle, clCaption);
+  
+  // paneldeki yazı 
+     mplist.clLoadProListViewDataFromDataset(Clomosy.ClDataSetFromJSON('[
+     {"mtitle" : "calisanlar"}]'));
+     
+  // 2. sayfaya geçme
+    MyForm.AddNewEvent(mtitle,tbeOnClick,'goCalisan');
+  
+    MyForm.Run;
+}
+
+
+/*var
+  Form1:TCLForm;
+  BtnMainCode : TclButton;
+  Unit1 :TclUnit;
+void goToUnit;
+{
+  Unit1.UnitName = 'uLogin';
+  Unit1.CallerForm = Form1;
+  Unit1.Run;
+}
+{
+  Form1 = TCLForm.Create(Self);
+  Form1.clSetCaption('Ana Kod');
+  Unit1 = TclUnit.Create;
+  BtnMainCode = Form1.AddNewButton(Form1,'BtnMainCode', 'Go to Unit!');
+  BtnMainCode.Width = Form1.clWidth;
+  Form1.AddNewEvent(BtnMainCode,tbeOnClick,'goToUnit');
+  Form1.Run;
+}*/
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+    
+    
+   
+    
+    
+    
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+

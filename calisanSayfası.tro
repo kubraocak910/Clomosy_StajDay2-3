@@ -1,0 +1,141 @@
+
+    
+var
+calisan:TclForm;
+plist : TClProListView;
+dlist:TClProListViewDesignerPanel;
+title,isim : TClProLabel;
+searchEdt :TClProSearchEdit;
+
+
+
+
+void dCreate 
+  {
+    dlist=calisan.AddNewProListViewDesignerPanel(plist, 'dlist');
+    dlist.clProSettings.IsRound = True; 
+    dlist.clProSettings.RoundHeight = 50;
+    dlist.clProSettings.RoundWidth = 50;
+    dlist.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#eeeeee');
+    dlist.SetclProSettings(dlist.clProSettings);
+    plist.SetDesignerPanel(dlist);
+    
+  }
+  
+void datadesign
+  { 
+  title =calisan.AddNewProLabel(dlist, 'title', '');
+  title.Align = altop;
+  title.Align = alTop;
+  title.Margins.Top = 50;
+  title.Margins.Left = 10;
+  title.Margins.Right = 10;
+  title.clProSettings.WordWrap = True;
+  title.clProSettings.AutoSize = True;
+  title.clProSettings.TextSettings.Font.Style = [fsBold];
+  title.clProSettings.FontSize =20;
+  title.clProSettings.FontColor=clAlphaColor.clHexToColor('#3cb187');
+  title.SetclProSettings(title.clProSettings);
+  dlist.AddPanelObject(title, clCaption);
+ 
+  
+  
+  isim =calisan.AddNewProLabel(dlist,'isim','');
+  isim.Align = alBottom
+  isim.Margins.Left = 10;
+  isim.Margins.Right = 10;
+  isim.Margins.bottom = 50;
+  isim.clProSettings.FontHorzAlign = palLeading;
+  isim.clProSettings.FontVertAlign = palcenter;
+  isim.clProSettings.AutoSize = True;
+  isim.clProSettings.FontSize = 20;
+  isim.clProSettings.FontColor=clAlphaColor.clHexToColor('#3cb187');
+  isim.SetclProSettings(isim.clProSettings);
+  dlist.AddPanelObject(isim, cltext);
+  
+  }
+  
+void data 
+  {
+  plist.clLoadProListViewDataFromDataset(Clomosy.ClDataSetFromJSON('[
+  {"title" : "Mert Özkal", "isim" : "Yönetici"},
+  {"title" : "Kübra Ocak", "isim" : "Yönetici"},
+  {"title" : "Çagri Ceyhan", "isim" : "Koordinatör"},
+  {"title" : "Özgenur Arslantürk", "isim" : "Koordinatör"},
+  { "title" : "Mehmet Can", "isim" : "Destek Uzmanı" },
+  { "title" : "Elif Nur Şahin", "isim" : "Veri Analisti" },
+  { "title" : "Zeynep Kaya", "isim" : "Proje Yöneticisi" },
+  { "title" : "Mert Demir", "isim" : "Eğitim Sorumlusu" },
+  { "title" : "Ahmet Yılmaz", "isim" : "Yazılım Geliştirici" }
+
+  ]'));
+  }
+  
+void search
+  {
+  
+  searchEdt=calisan.AddNewProSearchEdit(calisan, 'xName', 'nasil yardimci olabilirim ');
+    
+    // tasarım 
+   searchEdt.Align = alTop;
+   searchEdt.Height = 40;
+   searchEdt.Margins.Top = 15;
+   searchEdt.Margins.Left = 15;
+   searchEdt.Margins.Right = 15;
+   searchEdt.Margins.Bottom = 10;
+   searchEdt.clBarcodeReader = True;
+   searchEdt.clProSettings.BorderColor = clAlphaColor.clHexToColor('#d6cdcd');
+   searchEdt.clProSettings.FontColor = clAlphaColor.clDarkorchid;
+   searchEdt.clProSettings.FontSize = 12;
+   searchEdt.clProSettings.FontVertAlign = palcenter;//palLeading , palCenter , palTrailing
+   searchEdt.clProSettings.FontHorzAlign = palLeading;
+   searchEdt.clProSettings.TextSettings.Font.Style = [fsBold,fsItalic];
+   searchEdt.clProSettings.IsTransparent = False;
+   searchEdt.clProSettings.IsFill = True; 
+   searchEdt.clProSettings.IsRound = True;
+   searchEdt.clProSettings.RoundHeight = 15;
+   searchEdt.clProSettings.RoundWidth = 15;
+   searchEdt.clProSettings.BorderWidth = 3;
+   searchEdt.SetclProSettings(searchEdt.clProSettings);
+    
+  }
+
+{
+    
+    calisan=TclForm.Create(self);
+    calisan.clSetCaption('calisan');
+    plist=calisan.AddNewProListView(calisan, 'plist');
+    plist.align = alClient;
+    plist.margins.bottom=5;
+    plist.margins.top=5;
+    plist.margins.left=5;
+    plist.margins.right=5;
+    plist.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#3cb187');
+    plist.clProSettings.IsRound = True; 
+    plist.clProSettings.ViewType = lvWaterFall;
+    plist.clProSettings.ItemWidth = 200;
+    plist.clProSettings.ItemHeight = 200;
+    plist.clProSettings.ColCount = 2;
+    plist.clProSettings.ItemSpace = 10;
+    plist.SetclProSettings(plist.clProSettings);
+    
+    // arama yapılacak liste ile arama çubuğunun bağlama
+    
+    dCreate;
+    datadesign;
+    data;
+    search;
+    searchEdt.targetListView=plist;
+  
+    
+    calisan.Run;
+}
+    
+
+    
+    
+    
+    
+    
+    
+    
